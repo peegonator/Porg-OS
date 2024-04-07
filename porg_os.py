@@ -2,6 +2,7 @@ import time
 import threading
 import os
 import subprocess
+import logging
 
 # ASCII art logo
 logo = """
@@ -14,10 +15,27 @@ logo = """
 """
 print(logo)
 
-# Setup logger (this part should be implemented in your logging module)
+# Setup logger function
 def setup_logger():
-    pass
+    logger = logging.getLogger('PorgOS')
+    logger.setLevel(logging.INFO)
+    
+    # Create console handler and set level to INFO
+    ch = logging.StreamHandler()
+    ch.setLevel(logging.INFO)
+    
+    # Create formatter
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    
+    # Add formatter to ch
+    ch.setFormatter(formatter)
+    
+    # Add ch to logger
+    logger.addHandler(ch)
+    
+    return logger
 
+# Initialize logger
 logger = setup_logger()
 
 # Log boot message
