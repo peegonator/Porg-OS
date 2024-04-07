@@ -8,3 +8,5 @@ To use PorgOS, you can simply clone the repository:
 
 ```bash
 git clone https://github.com/peegonator/porg-os.git
+cd porg-os
+python3 porg_os.py
