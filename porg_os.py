@@ -38,6 +38,11 @@ def setup_logger():
 # Initialize logger
 logger = setup_logger()
 
+# Check if the 'user' directory exists, if not, create it
+if not os.path.exists('user'):
+    os.makedirs('user')
+    logger.info('Created user directory.')
+
 # Log boot message
 logger.info('Booting Porg OS...')
 
