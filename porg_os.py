@@ -1,6 +1,5 @@
 import time
 import threading
-from cli.logging import setup_logger
 import os
 import subprocess
 
@@ -15,7 +14,10 @@ logo = """
 """
 print(logo)
 
-# Setup logger
+# Setup logger (this part should be implemented in your logging module)
+def setup_logger():
+    pass
+
 logger = setup_logger()
 
 # Log boot message
@@ -53,7 +55,15 @@ while True:
     # Execute the command
     logger.info(f'Executing command: {action}')
     # Handle commands
-    if action.lower() == 'ls':
+    if '|' in action:
+        commands = action.split('|')
+        output = None
+        for cmd in commands:
+            if output:
+                cmd = cmd.strip() + ' ' + output
+            output = subprocess.check_output(cmd.strip(), shell=True).decode('utf-8')
+        print(output)
+    elif action.lower() == 'ls':
         logger.info('Listing files in the user directory...')
         # List files in the user directory
         user_files = os.listdir('user')
